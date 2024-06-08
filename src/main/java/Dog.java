@@ -1,14 +1,33 @@
-// class: bản vẽ, bản thiết kế
 public class Dog {
-
-    // 1. Property (thuộc tính)
     String name;
     int age;
-    // 2. Method (phương thức)
-    void bark(){
-        System.out.println("gâu gâu");
+
+//    @Override
+//    public String toString() {
+//       return String.format("Dog[name=%s, age=%d]", name, age);
+//    }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return  true;
+        if (!(object instanceof Dog)) return false;
+        Dog that = (Dog) object;
+        return this.name.equals(that.name) && this.age == that.age;
     }
-    int sum(int a, int b) {
-        return a + b;
+
+    @Override
+    public int hashCode() {
+        return name.hashCode() + age;
     }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+
 }
