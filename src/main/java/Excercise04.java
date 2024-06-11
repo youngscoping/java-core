@@ -41,6 +41,8 @@ public class Excercise04 {
         }
     }
 
+
+
     void question05() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập họ:");
@@ -52,8 +54,61 @@ public class Excercise04 {
 
     void question06() {
         Scanner scanner = new Scanner(System.in);
+        String firstName = "";
+        String middleName = "";
+        String lastName = "";
         System.out.println("Nhập tên:");
-        String name = scanner.nextLine();
+        String fullName = scanner.nextLine();
+        fullName = fullName.trim();
+        String words[] = fullName.split(" ");
+        lastName = words[0];
+        firstName = words[words.length - 1];
+         for (int i = 1; i < words.length -2 ; i++) {
+             middleName += words[i] + " ";
 
+         }
+        System.out.println("Họ là:" + firstName);
+        System.out.println("Tên đệm là:" + middleName);
+        System.out.println("Tên là:" + lastName);
+        scanner.close();
+
+    }
+
+    void question08() {
+        String groups[] = {"lớp học Java", "lớp học SQL", "lớp Java nâng cao", "phòng ôn thi Java"};
+        for (String group : groups) {  // vòng for đếm các phần tử group nằm trong mảng groups
+                if (group.contains("Java")) { // chèn câu điều kiện nếu phần tử group chứa từ Java
+                    System.out.println("Tên các nhóm chứa tên Java là: " + group); // nếu có thì in ra group đó
+            }
+        }
+     }
+
+     void question10 () {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("mời nhập chuỗi đầu tiên");
+        String s1 = scanner.nextLine();
+        System.out.println("mời nhập chuỗi thứ hai");
+        String s2 = scanner.nextLine();
+
+        for (int i = 0; i < s1.length(); i++) {
+            char c1 = s1.charAt(i);
+            char c2 = s2.charAt(s1.length() - 1 - i);
+            if (c1 != c2) {
+                System.out.println("KO");
+
+            }    else {
+                System.out.println("Ok");
+            }
+        }
+    }
+
+    String question15(String s){
+        String[] words = s.split(" "); // duong trung kien -> {duong, trung, kien}
+        String result = ""; // result trả về chuỗi ngược
+        for (int i = words.length- 1; i >= 0; i--) { // i = 3-1; i giảm dần
+            result += words[i] + " "; //
+        }
+        return result.trim();
     }
 }
