@@ -60,11 +60,12 @@ public class TuyenSinh implements ITuyenSinh{
 
     @Override
     public void hienThiDSTS() {
-        System.out.println("+-----+---------------------------+-------------------------------+-----+-------------------------------+");
-        System.out.println("| SBD |         HO TEN            |          DIA CHI              | MUT |        MON THI                | ");
-        System.out.println("+-----+---------------------------+-------------------------------+-----+-------------------------------+");
+        System.out.println("+------+--------------------+--------------------+------+--------------------+");
+        System.out.println("| SBD  |       HO TEN       |       DIA CHI      | MUT  |       MON THI      |");
+        System.out.println("+------+--------------------+--------------------+------+--------------------+");
         for (ThiSinh thiSinh : thiSinhList) {
-            System.out.printf("|  %-4s| -18s | %-18s| %-4s| %-18s | %n", thiSinh.soBaoDanh, thiSinh.hoTen, thiSinh.diaChi, thiSinh.soBaoDanh, thiSinh.monThi());
+            System.out.printf("| %-4s | %-18s | %-18s | %-4s | %-18s |%n",
+                    thiSinh.soBaoDanh, thiSinh.hoTen, thiSinh.diaChi, thiSinh.soBaoDanh, thiSinh.monThi());
         }
     }
 
@@ -73,12 +74,13 @@ public class TuyenSinh implements ITuyenSinh{
         System.out.printf("Nhập vào SBD");
         int soBaoDanh = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("+-----+---------------------------+-------------------------------+-----+-------------------------------+");
-        System.out.println("| SBD |         HO TEN            |          DIA CHI              | MUT |        MON THI                | ");
-        System.out.println("+-----+---------------------------+-------------------------------+-----+-------------------------------+");
+        System.out.println("+------+--------------------+--------------------+------+--------------------+");
+        System.out.println("| SBD  |       HO TEN       |       DIA CHI      | MUT  |       MON THI      |");
+        System.out.println("+------+--------------------+--------------------+------+--------------------+");
         for (ThiSinh thiSinh : thiSinhList) {
             if(thiSinh.soBaoDanh != soBaoDanh) {
-                System.out.printf("|  %-4s| -18s | %-18s| %-4s| %-18s | %n", thiSinh.soBaoDanh, thiSinh.hoTen, thiSinh.diaChi, thiSinh.soBaoDanh, thiSinh.monThi());
+                System.out.printf("| %-4s | %-18s | %-18s | %-4s | %-18s |%n",
+                        thiSinh.soBaoDanh, thiSinh.hoTen, thiSinh.diaChi, thiSinh.soBaoDanh, thiSinh.monThi());
             }
         }
     }
