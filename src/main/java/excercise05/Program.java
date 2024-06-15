@@ -2,8 +2,8 @@ package excercise05;
 
 public class Program {
     public static void main(String[] args) {
-        QLCB2 qlcb = new QLCB2();
-        qlcb.taoCanBo();
+        QLCB qlcb = new QLCB();
+        qlcb.showMenu();
 
     }
 

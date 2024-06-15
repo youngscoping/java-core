@@ -1,41 +1,131 @@
 package excercise05;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class QLCB {
-        void addCanBo() {
-        Scanner scanner = new Scanner(System.in);
+        private Scanner scanner = new Scanner(System.in);
+        private List<CanBo> canBoList = new LinkedList<>();
 
-        System.out.println("Thêm họ và tên");
-        String hoTen = scanner.nextLine();
-
-        System.out.println("Nhập tuổi");
-        int tuoi = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Nhập vào giới tính:");
-        GioiTinh gioiTinh = null;
-        System.out.println("Nhập vào giới tính");
-        System.out.println("1. NAM");
-        System.out.println("2. NỮ");
-        System.out.println("1. KHÁC");
-
-        String menu = scanner.nextLine();
-        switch (menu) {
-            case "1":
-                gioiTinh = GioiTinh.NAM;
-                break;
-
-            case "2":
-                gioiTinh = GioiTinh.NU;
-                break;
-
-            case "3":
-                gioiTinh = GioiTinh.KHAC;
-                break;
+        public void showMenu() {
+            while (true) {
+                System.out.println("1. Thêm cán bộ:");
+                System.out.println("2. Tìm kiếm theo họ tên:");
+                System.out.println("3. Hiển thị DSCB:");
+                System.out.println("4. Xoá cán bộ theo tên:");
+                System.out.println("5. Thoát chương trình:");
+                System.out.println("Mời bạn chọn chức năng:");
+                int menu = Integer.parseInt(scanner.nextLine());
+                if (menu == 1) {
+                    themCanBo();
+                } else if (menu == 2) {
+                    timKiemTheoHoTen();
+                } else if (menu == 3) {
+                    hienThiDSCB();
+                } else if (menu == 4) {
+                    xoaTheoTen();
+                } else if (menu == 5)  {
+                    return;
+                } else {
+                    System.out.println("Nhập lại!");
+                }
+            }
         }
-        System.out.println("Nhập vào địa chỉ:");
-        String diaChi = scanner.nextLine();
 
-        CanBo canBo = new CanBo(hoTen, tuoi, gioiTinh, diaChi);
-    }
+        private void xoaTheoTen() {
+            System.out.println("Nhập vào tên:");
+            String ten = scanner.nextLine();
+            Predicate<CanBo> predicate = new Predicate<CanBo>() {
+                @Override
+                public boolean test(CanBo canBo) {
+                    int lastIndexOf = canBo.hoTen.lastIndexOf(' ');
+                    String tenCanBo = canBo.hoTen.substring(lastIndexOf + 1);
+                    return tenCanBo.equals(ten);
+                }
+            } ;
+            canBoList.remove(predicate);
+        }
+
+        private void hienThiDSCB() {
+            for (CanBo canBo : canBoList) {
+                System.out.println(canBo);
+            }
+        }
+
+        private void timKiemTheoHoTen() {
+            String hoTen = nhapVaoHoTen();
+            for (CanBo canBo : canBoList) {
+                if (canBo.hoTen.equals(hoTen)) {
+                    System.out.println(canBo);
+                }
+            }
+        }
+
+        private void themCanBo() {
+            System.out.println("1. Thêm công nhân");
+            System.out.println("2. Kỹ sư");
+            System.out.println("3. Nhân viên");
+            System.out.println("4. Chọn menu");
+
+            int menu = Integer.parseInt(scanner.nextLine());
+            if (menu < 1 || menu  > 3) return;
+            String hoTen = nhapVaoHoTen();
+            int tuoi = nhapVaoTuoi();
+            GioiTinh gioiTinh = nhapVaoGioiTinh();
+            String diaChi = nhapVaoDiaChi();
+            if (menu ==1) {
+                System.out.println("Nhập vào bậc:");
+                int bac = Integer.parseInt(scanner.nextLine());
+                CongNhan congNhan = new CongNhan(hoTen, tuoi, gioiTinh, diaChi, bac);
+               //  canBoList.add(CongNhan);
+            }
+            else if (menu == 2) {
+                System.out.println("Nhập vào ngành đào tạo:");
+                String nganhDaoTao = scanner.nextLine();
+                KySu kySu = new KySu(hoTen, tuoi, gioiTinh, diaChi, nganhDaoTao);
+              //   canBoList.add(KySu);
+            } else {
+                System.out.println("Nhập vào công việc:");
+                String congViec = scanner.nextLine();
+                NhanVien nhanVien = new NhanVien(hoTen, tuoi, gioiTinh, diaChi, congViec);
+              //   canBoList.add(NhanVien);
+            }
+
+
+
+
+        }
+
+        private String nhapVaoHoTen() {
+            System.out.println("Nhập vào họ tên:");
+            return scanner.nextLine();
+        }
+
+        private int nhapVaoTuoi(){
+            System.out.println("Nhập vào tuổi:");
+            return Integer.parseInt(scanner.nextLine());
+        }
+
+        private GioiTinh nhapVaoGioiTinh() {
+            System.out.println("Chọn giới tính");
+            System.out.println("1. Nam");
+            System.out.println("2. Nữ");
+            System.out.println("3. Khác");
+
+            String menu = scanner.nextLine();
+            if (menu.equals("1")) {
+                return GioiTinh.NAM;
+            } else if (menu.equals("2")) {
+                return GioiTinh.NU;
+            } return GioiTinh.KHAC;
+        }
+
+        private String nhapVaoDiaChi() {
+            System.out.println("Nhập vào địa chỉ:");
+            return scanner.nextLine();
+        }
+
+
 }
