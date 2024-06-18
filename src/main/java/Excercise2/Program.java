@@ -22,7 +22,7 @@ public class Program {
 
             int menu = Integer.parseInt(scanner.nextLine());
             if (menu == 1) {
-                innitStudent();
+
                 System.out.println("Tạo thành công 10 sinh viên");
             } else if (menu == 2) {
                 for (Student student : studentList) {
