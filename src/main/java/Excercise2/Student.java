@@ -1,7 +1,7 @@
 package Excercise2;
 
 public class Student implements IStudent {
-    private static int count;
+    private static int count = 1;
     private  int id ;
      private String name;
      private int group;

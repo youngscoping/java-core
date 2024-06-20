@@ -60,7 +60,7 @@ public class MenuCreating {
 
         private void innitStudent(){
             for (int i =0; i < 10; i++) {
-                Student student = new Student( "Student" + (i+1), random.nextInt(3)+1);
+                Student student = new Student( "Student " + (i+1), random.nextInt(3)+1);
                 studentList.add(student);
             }
          }
