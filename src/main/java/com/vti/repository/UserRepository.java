@@ -8,42 +8,34 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserRepository implements IUserRepository {
+public class UserRepository implements IUserRepository{
     @Override
-    public List<User> findAll() throws SQLException, IOException {
-        String sql = "SELECT * FROM users";
+    public List<User> findEmployeeAndManagerByProjectId(int projectId) throws SQLException, IOException {
+        String sql = "SELECT * FROM users WHERE ROLE IN ('EMPLOYEE', 'MANAGER') AND project_id = (?)";
         try (
                 Connection connection = JdbcUtil.getConnection();
-                Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)
+                PreparedStatement pStmt = connection.prepareStatement(sql)
+
         ) {
-            List<User> users = new LinkedList<>();
-            while (rs.next()) {
-                User user = getUser(rs);
-
-                users.add(user);
+            pStmt.setInt(1, projectId);
+            try (ResultSet rs = pStmt.executeQuery()) {
+                List<User> users = new LinkedList<>();
+                while (rs.next()) {
+                    User user = getUser(rs);
+                    users.add(user);
+                }
+                return users;
             }
-            return users;
         }
-
-    }
-    @Override
-    public User findById(int id) throws SQLException, IOException {
-        String sql = "SELECT * FROM `users` WHERE id = ?";
-        try (
-                Connection connection = JdbcUtil.getConnection();
-                PreparedStatement pStmt = connection.prepareStatement(sql);
-                ) {
-             pStmt.setInt(1, id);
-             try (ResultSet rs = pStmt.executeQuery()) {
-                 return rs.next() ? getUser(rs) : null;
-             }
-          }
     }
 
+
+
+
+
     @Override
-    public User findByEmailAndPassword(String email, String password) throws SQLException, IOException {
-        String sql = "{CALL find_by_email_and_password(?,?)}";
+    public User findAdminByEmailAndPassword(String email, String password) throws SQLException, IOException {
+        String sql = "{CALL find_admin_by_email_and_password(?,?)}";
         try (
                 Connection connection = JdbcUtil.getConnection();
                 CallableStatement cStmt = connection.prepareCall(sql);
@@ -56,17 +48,6 @@ public class UserRepository implements IUserRepository {
         }
 
     }
-
-    @Override
-    public int deleteById(int id) throws SQLException, IOException {
-        String sql = "DELETE FROM `users` WHERE ID = ?" ;
-        try (
-                Connection connection = JdbcUtil.getConnection();
-                PreparedStatement pStmt = connection.prepareStatement(sql);
-           ) {
-                pStmt.setInt(1, id);
-                return pStmt.executeUpdate();
-        }    }
 
 
 
@@ -92,6 +73,7 @@ public class UserRepository implements IUserRepository {
         user.setPassword(rs.getString("password"));
         user.setRole(rs.getString("role"));
         user.setExpInYear(rs.getInt("exp_in_year"));
+        user.setProjectId(rs.getInt("project_id"));
         return user;
     }
 
