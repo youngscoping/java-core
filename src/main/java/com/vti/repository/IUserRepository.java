@@ -14,7 +14,7 @@ public interface IUserRepository {
      * */
 
 
-    List<User> findAll() throws SQLException, IOException;
+    List<User> findEmployeeByProjectId(int projectId) throws SQLException, IOException;
 
 
     /**
@@ -23,11 +23,10 @@ public interface IUserRepository {
      * @throws SQLException
      * @throws IOException
      */
-    User findById(int id) throws SQLException, IOException;
 
-    User findByEmailAndPassword(String email, String password) throws SQLException, IOException;
+    List<User> findAllManager() throws SQLException, IOException;
 
-    int deleteById(int id) throws SQLException, IOException;
+    User findManagerByEmailAndPassword(String email, String password) throws SQLException, IOException;
 
-    int create(String fullName, String email) throws SQLException, IOException;
+
 }

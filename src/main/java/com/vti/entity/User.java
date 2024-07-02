@@ -14,6 +14,7 @@ public class User {
     private Role role;
     private String proSkill;
     private int expInYear;
+    private int projectId;
 
     public void setRole(String role) {
         this.role = Role.valueOf(role);
@@ -21,7 +22,7 @@ public class User {
     }
 
     public enum Role {
-        ADMIN, EMPLOYEE
+        EMPLOYEE, MANAGER
     }
 
 
