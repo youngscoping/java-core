@@ -13,34 +13,33 @@ import java.util.List;
 public class UserService implements IUserService {
     private IUserRepository repository;
 
+
     @Override
-    public List<User> findEmployeeAndManagerByProjectId(int projectId) {
+    public List<User> findEmployeeByProjectId(int projectId) {
         try {
-            return repository.findEmployeeAndManagerByProjectId(projectId);
-        } catch (SQLException | IOException e) {
+            return repository.findEmployeeByProjectId(projectId);
+        } catch (IOException | SQLException e) {
             return Collections.emptyList();
         }
     }
 
-
+    @Override
+    public List<User> findAllManager() {
+        try{
+            return repository.findAllManager();
+        } catch (IOException | SQLException e) {
+            return Collections.emptyList();
+        }
+    }
 
     @Override
-    public User findAdminByEmailAndPassword(String email, String password) {
+    public User findManagerByEmailAndPassword(String email, String password) {
         try {
-            return repository.findAdminByEmailAndPassword(email, password);
-        } catch (SQLException | IOException e) {
+            return repository.findManagerByEmailAndPassword(email,password);
+        } catch (IOException | SQLException e) {
             return null;
         }
     }
 
-
-    @Override
-    public int create(String fullName, String email) {
-        try {
-            return repository.create(fullName, email);
-        } catch (SQLException | IOException e) {
-            return 0;
-        }
-    }
 
 }

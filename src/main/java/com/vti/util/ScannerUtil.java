@@ -23,30 +23,7 @@ public class ScannerUtil {
         }
     }
 
-    public static String inputFullName() {
-        while (true) {
-            String input = inputString();
-            if (hasAllAlphabetic(input)) {
-                return input;
-            } else {
-                System.err.println("Yêu cầu chỉ chứa chứ");
-                System.err.println("Nhập lại");
-            }
-        }
-    }
 
-    private static boolean hasAllAlphabetic(String s) {
-        int length = s.length();
-        for (int i = 0; i < length; i++) {
-            char c = s.charAt(i);
-            if (Character.isWhitespace(c))
-                continue;
-            if (!Character.isAlphabetic(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public static String inputEmail() {
         while (true) {
